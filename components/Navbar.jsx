@@ -23,7 +23,7 @@ const Navbar = () => {
           className="fixed w-full z-50 rounded-xl"
         >
           <div className="max-container flex justify-between items-center px-12 py-5 bg-black my-8">
-            <p className="bold-36 text-white">KYLE's WEBSITE</p>
+            <p className="bold-36 text-white">KYLE WEBSITE</p>
           </div>
         </motion.nav>
       )}
