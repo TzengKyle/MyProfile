@@ -56,7 +56,7 @@
 
   /* * for container */
   .max-container {
-    @apply mx-auto max-w-[1440px];
+    @apply mx-auto max-w-[1280px];
   }
 
   .padding-container {

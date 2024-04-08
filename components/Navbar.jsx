@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { Facebook, Instagram, Github, Linkedin } from 'lucide-react';
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -22,8 +23,25 @@ const Navbar = () => {
           transition={{ type: "spring", stiffness: 100 }}
           className="fixed w-full z-50 rounded-xl"
         >
-          <div className="max-container flex justify-between items-center px-12 py-5 bg-black my-8">
-            <p className="bold-36 text-white">KYLE WEBSITE</p>
+          <div className="max-container flex justify-between items-center px-12 py-5 bg-black lg:my-8">
+            <p className="md:bold-36 text-white bold-24">KYLE WEBSITE</p>
+            <div className="flex gap-6">
+              <Link href="https://www.facebook.com/profile.php?viewas=100000686899395&id=100003533029100">
+                <Facebook className="text-white cursor-pointer hover:scale-110" />
+              </Link>
+              <Link href="https://www.facebook.com/profile.php?viewas=100000686899395&id=100003533029100">
+                <Instagram className="text-white cursor-pointer hover:scale-110" />
+              </Link>
+              <Link href="https://www.facebook.com/profile.php?viewas=100000686899395&id=100003533029100">
+                <Github className="text-white cursor-pointer hover:scale-110" />
+              </Link>
+              <Link href="https://www.facebook.com/profile.php?viewas=100000686899395&id=100003533029100">
+                <Linkedin className="text-white cursor-pointer hover:scale-110" />
+              </Link>
+            </div>
+
+
+
           </div>
         </motion.nav>
       )}
