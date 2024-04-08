@@ -44,7 +44,7 @@ const ProjectCard = ({ type, title, content, imgUrl, index }) => {
 const Projects = () => {
     return (
         <>
-            <div className=" bg-black py-10 overflow-x-hidden overflow-y-hidden _">
+            <div className=" bg-black py-10 overflow-x-hidden overflow-y-hidden">
                 <motion.div
                     variants={staggerContainer}
                     initial="hidden"
