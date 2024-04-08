@@ -2,6 +2,7 @@ import Hero from "@/sections/Hero";
 import Intro from "@/sections/Intro";
 import Image from "next/image";
 import Projects from "@/sections/Projects";
+import ContactUs from "@/sections/ContactUs";
 
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero />
       <Intro />
       <Projects />
+      <ContactUs />
     </main>
   );
 }

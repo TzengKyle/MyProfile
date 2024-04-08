@@ -7,6 +7,15 @@ import { useState, useEffect } from "react";
 import { fadeIn } from "@/util/motion";
 import { staggerContainer } from "@/util/motion";
 import TypingText from "@/components/TypingText";
+import { ArrowDownToLine, SendHorizontal } from "lucide-react";
+
+
+import { Button } from "@/components/ui/button"
+import {
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+} from "@/components/ui/hover-card"
 
 const Intro = () => {
     return (
@@ -37,19 +46,43 @@ const Intro = () => {
                 </motion.div>
 
                 <div className="flex items-center justify-center flex-[1] my-10 md:my-0">
-                    <motion.div
-                        variants={staggerContainer}
-                        initial="hidden"
-                        whileInView="show"
-                        viewport={{ once: false, amount: 0.25 }}
-                    >
-                        <motion.div
+
+                    <HoverCard>
+                        <HoverCardTrigger asChild>
+                            <motion.div
+                                variants={staggerContainer}
+                                initial="hidden"
+                                whileInView="show"
+                                viewport={{ once: false, amount: 0.25 }}
+                            >
+                                <motion.div
+                                    variants={fadeIn('right', 'tween', 0.2, 1)}
+                                    whileHover={{ rotate: 360 }}
+                                    transition={{ duration: 1 }}
+                                    className="relative z-[2] lg:h-[420px] lg:w-[420px] md:h-[360px] md:w-[360px] h-[240px] w-[240px] rounded-full overflow-hidden border-black flex items-center justify-center border cursor-pointer">
+                                    <div className="relative z-[2] lg:h-[400px] lg:w-[400px] md:h-[340px] md:w-[340px] h-[220px] w-[220px] rounded-full overflow-hidden">
+                                        {/* // ! object-cover是盡可能超出容器 並且裁切多餘的部分 可以保持原本比例*/}
+                                        <Image
+                                            src="/intro-img-1.png"
+                                            fill
+                                            alt="flywheel-img-1"
+                                            className="object-cover"
+                                        ></Image>
+                                    </div>
+                                </motion.div>
+                            </motion.div >
+                        </HoverCardTrigger>
+                        <HoverCardContent className="w-80 bg-white bg-opacity-60 border-black rounded-full flexCenter cursor-pointer">
+                            <div className="bold-18 text-black flex gap-4">更多關於我<SendHorizontal /></div>
+                        </HoverCardContent>
+                    </HoverCard>
+                    {/* <motion.div
                             variants={fadeIn('right', 'tween', 0.2, 1)}
                             whileHover={{ rotate: 360 }}
                             transition={{ duration: 1 }}
                             className="relative z-[2] lg:h-[420px] lg:w-[420px] md:h-[360px] md:w-[360px] h-[240px] w-[240px] rounded-full overflow-hidden border-black flex items-center justify-center border cursor-pointer">
                             <div className="relative z-[2] lg:h-[400px] lg:w-[400px] md:h-[340px] md:w-[340px] h-[220px] w-[220px] rounded-full overflow-hidden">
-                                {/* // ! object-cover是盡可能超出容器 並且裁切多餘的部分 可以保持原本比例*/}
+                                
                                 <Image
                                     src="/intro-img-1.png"
                                     fill
@@ -57,8 +90,8 @@ const Intro = () => {
                                     className="object-cover"
                                 ></Image>
                             </div>
-                        </motion.div>
-                    </motion.div >
+                        </motion.div> */}
+
                 </div>
             </div >
         </>

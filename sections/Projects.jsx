@@ -44,7 +44,7 @@ const ProjectCard = ({ type, title, content, imgUrl, index }) => {
 const Projects = () => {
     return (
         <>
-            <div className=" bg-black py-10 overflow-x-hidden overflow-y-hidden">
+            <div className=" bg-black pt-10 pb-20 overflow-x-hidden overflow-y-hidden">
                 <motion.div
                     variants={staggerContainer}
                     initial="hidden"
@@ -59,13 +59,9 @@ const Projects = () => {
                     </motion.div>
                     <div className="flexCenter">
                         <div className="grid xl:grid-cols-3 grid-cols-2 z-[1] gap-4">
-                            {/* md:grid-cols-3 sm:grid-cols-2 */}
                             {projectInfos.map((projectInfo, index) => (
                                 <ProjectCard type={projectInfo.type} title={projectInfo.title} content={projectInfo.content} imgUrl={projectInfo.imgUrl[0]} key={index} index={index} />
                             ))}
-                            {/* <ProjectCard title={"Kyle"} content={"content"} imgUrl={"/hero-img-1.png"} />
-                        <ProjectCard title={"Kyle"} content={"content"} imgUrl={"/hero-img-1.png"} />
-                        <ProjectCard title={"Kyle"} content={"content"} imgUrl={"/hero-img-1.png"} /> */}
                         </div >
                     </div>
                 </motion.div>

@@ -21,7 +21,7 @@ const Navbar = () => {
           animate={{ y: 0 }}
           exit={{ y: -100 }}
           transition={{ type: "spring", stiffness: 100 }}
-          className="fixed w-full z-50 rounded-xl"
+          className="fixed w-full z-50"
         >
           <div className="max-container flex justify-between items-center px-12 py-5 bg-black lg:my-8">
             <p className="md:bold-36 text-white bold-24">KYLE WEBSITE</p>
@@ -29,13 +29,13 @@ const Navbar = () => {
               <Link href="https://www.facebook.com/profile.php?viewas=100000686899395&id=100003533029100">
                 <Facebook className="text-white cursor-pointer hover:scale-110" />
               </Link>
-              <Link href="https://www.facebook.com/profile.php?viewas=100000686899395&id=100003533029100">
+              <Link href="https://www.instagram.com/kyletzeng0514/">
                 <Instagram className="text-white cursor-pointer hover:scale-110" />
               </Link>
-              <Link href="https://www.facebook.com/profile.php?viewas=100000686899395&id=100003533029100">
+              <Link href="https://github.com/TzengKyle">
                 <Github className="text-white cursor-pointer hover:scale-110" />
               </Link>
-              <Link href="https://www.facebook.com/profile.php?viewas=100000686899395&id=100003533029100">
+              <Link href="https://www.linkedin.com/in/kyle-tzeng-8944bb2a4/">
                 <Linkedin className="text-white cursor-pointer hover:scale-110" />
               </Link>
             </div>
