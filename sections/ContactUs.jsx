@@ -44,7 +44,7 @@ const ContactUs = () => {
 
     const fetchComments = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/get-comment/newest', {
+            const response = await fetch('/api/get-comment/newest', {
                 method: 'GET',
             });
             if (!response.ok) {
