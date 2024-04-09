@@ -59,9 +59,8 @@ const ProjectPageList = ({ titles }) => {
         <div className="flex flex-col relative mt-4">
             {titles.map((title, index) => (
                 <ProjectPageListLine
-                    index={index}
                     title={title}
-
+                    key={index}
                 />
             ))}
         </div>
@@ -69,9 +68,9 @@ const ProjectPageList = ({ titles }) => {
 };
 
 
-const ProjectPageListLine = ({ index, title }) => {
+const ProjectPageListLine = ({ title }) => {
     return (
-        <div className="flex relative" key={index}>
+        <div className="flex relative">
             <div className="flex items-start">
                 <p className="regular-20 text-gray-30 mt-1 mr-2">{index + 1}.</p>
             </div>
