@@ -2,8 +2,10 @@ export const projectInfos = [
   {
     type: 'UI程式專案',
     title: '模擬企業專案開發的團體遊戲專案',
+    h1: ['專案介紹', '學習成果'],
     content: '我們需要分析客戶(其他組別)的需求，完成指定系統的各項功能。利用C++與QT creator開發UI程式，並以StarUML繪製behavioral/functional/structural diagram來呈現給客戶與教授。而我在專案中主要負責遊戲主體的撰寫、Ui物件移動時的邏輯、以及遊戲機制的設計。',
     result: ['扎實的C++與程式語言能力', '熟悉小型團體合作專案的流程', '熟悉利用模型圖的團隊專案溝通'],
+    iconUrls: ["/cPlus.png", "/qt.png", "/starUML.png"],
     imgUrl: ['/project1-img-1.png']
 
   },
