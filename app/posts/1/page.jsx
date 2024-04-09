@@ -60,6 +60,7 @@ const ProjectPageList = ({ titles }) => {
             {titles.map((title, index) => (
                 <ProjectPageListLine
                     title={title}
+                    index={index}
                     key={index}
                 />
             ))}
@@ -68,7 +69,7 @@ const ProjectPageList = ({ titles }) => {
 };
 
 
-const ProjectPageListLine = ({ title }) => {
+const ProjectPageListLine = ({ title, index }) => {
     return (
         <div className="flex relative">
             <div className="flex items-start">
