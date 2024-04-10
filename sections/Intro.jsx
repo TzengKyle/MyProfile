@@ -72,7 +72,7 @@ const Intro = () => {
                                 </motion.div>
                             </motion.div >
                         </HoverCardTrigger>
-                        <HoverCardContent className="w-80 bg-white bg-opacity-60 border-black rounded-full flexCenter cursor-pointer">
+                        <HoverCardContent className="w-80 bg-white bg-opacity-60 border-black rounded-full flexCenter cursor-pointer hover:bg-slate-200">
                             <div className="bold-18 text-black flex gap-4">更多關於我<SendHorizontal /></div>
                         </HoverCardContent>
                     </HoverCard>

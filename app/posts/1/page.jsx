@@ -3,12 +3,9 @@
 import { projectInfos } from "@/constants";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
+import { CircleArrowLeft, CircleArrowRight } from 'lucide-react';
 
-import {
-    Avatar,
-    AvatarFallback,
-    AvatarImage,
-} from "@/components/ui/avatar"
+import { useState } from "react";
 
 const ProjectPageElementBox = ({ elements }) => {
     return <>{elements.map((element) => element)}</>;
@@ -17,7 +14,7 @@ const ProjectPageElementBox = ({ elements }) => {
 
 const ProjectPageCover = ({ imgUrl }) => {
     return (
-        <div className="relative max-container w-screen h-[480px] z-[1]">
+        <div className="relative max-container w-screen h-[400px] z-[1]">
             <Image
                 src={`${imgUrl}`}
                 fill
@@ -27,7 +24,6 @@ const ProjectPageCover = ({ imgUrl }) => {
         </div>
     );
 };
-
 
 
 const ProjectPageTitle = ({ type, title }) => {
@@ -46,6 +42,10 @@ const ProjectPageTitle = ({ type, title }) => {
 
 const ProjectPageH1 = ({ h1 }) => {
     return <h1 className=" bold-32 text-primary_blue mt-12">{h1}</h1>;
+};
+
+const ProjectPageH2 = ({ h2 }) => {
+    return <h2 className=" bold-20 text-primary_blue mt-6">{h2}</h2>;
 };
 
 
@@ -68,7 +68,6 @@ const ProjectPageList = ({ titles }) => {
     );
 };
 
-
 const ProjectPageListLine = ({ title, index }) => {
     return (
         <div className="flex relative">
@@ -83,10 +82,27 @@ const ProjectPageListLine = ({ title, index }) => {
 };
 
 export default function Page() {
-    const { type, title, h1, content, result, iconUrls, imgUrl } = projectInfos[0]
+    const [imgCurrentIndexs, setImgCurrentIndexs] = useState([2])
+    const { type, title, h1, h2, content, result, iconUrls, imgUrl, imgIndexs } = projectInfos[0]
+
+    const handlePrevImg = (imgGroupIndex) => {
+        if (imgCurrentIndexs[imgGroupIndex] > imgIndexs[imgGroupIndex][0]) {
+            const newImgCurrentIndexs = [...imgCurrentIndexs];
+            newImgCurrentIndexs[imgGroupIndex] -= 1;
+            setImgCurrentIndexs(newImgCurrentIndexs)
+        }
+    }
+
+    const handleNextImg = (imgGroupIndex) => {
+        if (imgCurrentIndexs[imgGroupIndex] < imgIndexs[imgGroupIndex][imgIndexs[imgGroupIndex].length - 1]) {
+            const newImgCurrentIndexs = [...imgCurrentIndexs];
+            newImgCurrentIndexs[imgGroupIndex] += 1;
+            setImgCurrentIndexs(newImgCurrentIndexs)
+        }
+    }
 
     return (
-        <div className=" overflow-x-hidden">
+        <div className="overflow-y-hidden overflow-x-hidden">
             <ProjectPageCover imgUrl={imgUrl} />
 
             <div className="flex items-center justify-center gap-12 mt-4 border-y-2 border-black max-container py-4">
@@ -120,8 +136,26 @@ export default function Page() {
                 <ProjectPagePassage passage={content} />
                 <ProjectPageH1 h1={h1[1]} />
                 <ProjectPageList titles={result} />
+                <ProjectPageH1 h1={h1[2]} />
+                <ProjectPageH2 h2={h2[0]} />
+                <ProjectPagePassage passage={content} />
+                <div className="flexCenter mt-4" >
+                    <div className="relative aspect-video md:w-[800px] w-full flex justify-between border-2">
+                        <div className="absolute aspect-video md:w-[800px] w-full flex overflow-hidden z-[-1]">
+                            {/* // ! object-cover是盡可能超出容器 並且裁切多餘的部分 可以保持原本比例*/}
+                            <Image
+                                src={`/project1-img-${imgCurrentIndexs[0]}.png`}
+                                fill="true"
+                                alt="project1-img-1"
+                                className="object-fit"
+                            ></Image>
+                        </div>
+                        <div className=" w-12 hover:text-white bold-20 hover:bg-black flexCenter hover:bg-opacity-20 text-gray-400 cursor-pointer" onClick={() => handlePrevImg(0)}><CircleArrowLeft /></div>
+                        <div className=" w-12 hover:text-white bold-20 hover:bg-black flexCenter hover:bg-opacity-20 text-gray-400 cursor-pointer" onClick={() => handleNextImg(0)}><CircleArrowRight /></div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </div >
     );
 }
 

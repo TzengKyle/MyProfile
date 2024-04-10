@@ -22,7 +22,7 @@ const CommentCard = ({ name, imgUrl, content, index }) => {
     return (
         <>
             {/* // ! min-w-[320px]是讓它可以滑動的關鍵 因為flex會把它硬塞進去*/}
-            <motion.div variants={slideIn('right', 'tween', 0.1, 1)} className="lg:w-[400px] sm:w-[300px] w-[240px] mx-2 flex flex-col gap-2 border border-black py-2 px-2" style={{ borderRadius: '20px' }} >
+            <motion.div variants={fadeIn('right', 'tween', 0.1, 1)} className="h-[240px] lg:w-[400px] sm:w-[300px] w-[240px] mx-2 flex flex-col gap-2 border border-black py-2 px-2" style={{ borderRadius: '20px' }} >
                 <div className="flex items-center gap-6 border rounded-full border-black">
                     <div className="relative w-[50px] h-[50px] rounded-full overflow-hidden z-[1]">
                         {/* // ! object-cover是盡可能超出容器 並且裁切多餘的部分 可以保持原本比例*/}
@@ -44,7 +44,7 @@ const CommentCard = ({ name, imgUrl, content, index }) => {
     );
 };
 
-const CommentBoard = ({ comments, commentCount, page }) => {
+const CommentBoard = ({ comments, commentCount, currentPage, perPage }) => {
     return <>
         {comments && comments.length > 0 && (
             <motion.div
@@ -52,7 +52,7 @@ const CommentBoard = ({ comments, commentCount, page }) => {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: false, amount: 0.25 }}
-                className="flexCenter"
+                className="flex justify-center h-[520px]"
             >
 
                 <div className="grid xl:grid-cols-3 grid-cols-2 z-[1] gap-4">
@@ -70,8 +70,27 @@ const CommentBoard = ({ comments, commentCount, page }) => {
 
 const ContactUs = () => {
     const [comments, setComments] = useState([]);
-    const [commentCount, setCommentCount] = useState([]);
-    const [page, setPage] = useState(1);
+    const [commentCount, setCommentCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const perPage = 6
+
+    const handleNextPage = () => {
+        if (currentPage < Math.ceil(commentCount / perPage)) {
+            setCurrentPage(currentPage + 1)
+            // setComments(allComments.slice((currentPage - 1) * perPage, currentPage * perPage))
+        }
+    }
+
+    const handlePrevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1)
+            // setComments(allComments.slice((currentPage - 1) * perPage, currentPage * perPage))
+        }
+    }
+
+    const handleChosenPage = (page) => {
+        setCurrentPage(page)
+    }
 
     const fetchComments = async () => {
         try {
@@ -110,10 +129,10 @@ const ContactUs = () => {
 
                 <motion.div variants={fadeIn('right', 'tween', 0.2, 1)} className="bold-64 mb-10 flex items-center flex-col">
                     <div>聯繫我們</div>
-                    {commentCount && (
+                    {/* {commentCount && (
                         <div>{commentCount}</div>
                     )
-                    }
+                    } */}
                     <div className="flex gap-2">
                         <motion.div
                             variants={fadeIn('up', 'tween', 0.4, 1)}
@@ -134,7 +153,25 @@ const ContactUs = () => {
                     </div>
                 </motion.div>
             </motion.div>
-            <CommentBoard comments={comments} commentCount={commentCount} />
+            <CommentBoard comments={comments.slice((currentPage - 1) * perPage, currentPage * perPage)} commentCount={commentCount} currentPage={currentPage} perPage={perPage} key={currentPage} />
+
+            <Pagination>
+                <PaginationContent>
+                    <PaginationItem className=" hover:bg-slate-200 rounded-full cursor-pointer border border-black w-28 flexCenter">
+                        <PaginationPrevious onClick={() => handlePrevPage()} />
+                    </PaginationItem>
+                    {
+                        Array.from({ length: Math.ceil(commentCount / perPage) }, (_, index) => (
+                            <PaginationItem className=" hover:bg-slate-200 rounded-full cursor-pointer border border-black">
+                                <PaginationLink onClick={() => handleChosenPage(index + 1)}>{index + 1}</PaginationLink>
+                            </PaginationItem>
+                        ))
+                    }
+                    <PaginationItem className=" hover:bg-slate-200 rounded-full cursor-pointer border border-black w-28 flexCenter">
+                        <PaginationNext onClick={() => handleNextPage()} />
+                    </PaginationItem>
+                </PaginationContent>
+            </Pagination>
 
 
         </div>

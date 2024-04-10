@@ -24,7 +24,7 @@ const Navbar = () => {
           className="fixed w-full z-50"
         >
           <div className="max-container flex justify-between items-center px-12 py-5 bg-black lg:my-8">
-            <p className="md:bold-36 text-white bold-24">KYLE WEBSITE</p>
+            <Link href="/" className="md:bold-36 text-white bold-24">KYLE WEBSITE</Link>
             <div className="flex gap-6">
               <Link href="https://www.facebook.com/profile.php?viewas=100000686899395&id=100003533029100">
                 <Facebook className="text-white cursor-pointer hover:scale-110" />
