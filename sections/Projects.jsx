@@ -10,7 +10,7 @@ import TypingText from "@/components/TypingText";
 import { projectInfos } from "@/constants";
 import { Button } from "@/components/ui/button";
 
-const ProjectCard = ({ type, title, content, imgUrl, pageUrl, index }) => {
+const ProjectCard = ({ type, title, intro, coverImgUrl, pageUrl, index }) => {
     return (
         <>
             {/* // ! min-w-[320px]是讓它可以滑動的關鍵 因為flex會把它硬塞進去*/}
@@ -19,7 +19,7 @@ const ProjectCard = ({ type, title, content, imgUrl, pageUrl, index }) => {
                     <div className="relative h-48 overflow-hidden z-[1]">
                         {/* // ! object-cover是盡可能超出容器 並且裁切多餘的部分 可以保持原本比例*/}
                         <Image
-                            src={`${imgUrl}`}
+                            src={`${coverImgUrl}`}
                             fill
                             alt="flywheel-img-1"
                             className="object-cover"
@@ -34,7 +34,7 @@ const ProjectCard = ({ type, title, content, imgUrl, pageUrl, index }) => {
                             <h2 className="overflow-hidden flex-[2] text-blue-600 lg:bold-18 bold-16 border-black z-[2] ">
                                 {title}
                             </h2>
-                            <p className="overflow-hidden flex-[5] border-t border-dashed pt-2 lg:regular-16 regular-12 border-black hidden sm:block">{content}</p>
+                            <p className="overflow-hidden flex-[5] border-t border-dashed pt-2 lg:regular-16 regular-12 border-black hidden sm:block">{intro}</p>
                         </div>
                     </div>
                 </Link>
@@ -62,7 +62,7 @@ const Projects = () => {
                     <div className="flexCenter">
                         <div className="grid xl:grid-cols-3 grid-cols-2 z-[1] gap-4">
                             {projectInfos.map((projectInfo, index) => (
-                                <ProjectCard type={projectInfo.type} title={projectInfo.title} content={projectInfo.content} imgUrl={projectInfo.imgUrl[0]} key={index} pageUrl={projectInfo.pageUrl} index={index} />
+                                <ProjectCard type={projectInfo.type} title={projectInfo.title} intro={projectInfo.intro} coverImgUrl={projectInfo.coverImgUrl} key={index} pageUrl={projectInfo.pageUrl} index={index} />
                             ))}
                         </div >
                     </div>

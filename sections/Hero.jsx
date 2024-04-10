@@ -8,6 +8,33 @@ import { motion } from "framer-motion";
 import { fadeIn } from "@/util/motion";
 import { staggerContainer } from "@/util/motion";
 
+const BlackButton = ({ text, icon }) => {
+    return (
+        <motion.div
+            variants={fadeIn('up', 'tween', 0.4, 1)}
+            className="border text-white bg-black bold-18 py-4 px-8 rounded-full flex gap-2 mt-40 cursor-pointer"
+            whileHover={{ scale: 1.1 }}
+        >
+            <span>{text}</span>
+            {icon}
+        </motion.div>
+    )
+}
+
+const WhiteButton = ({ text, icon }) => {
+    return (
+        <motion.div
+            variants={fadeIn('up', 'tween', 0.4, 1)}
+            className="border border-black text-black bg-white bold-18 py-4 px-8 rounded-full flex gap-2 mt-2 cursor-pointer"
+            whileHover={{ scale: 1.1 }}
+        >
+            <span>{text}</span>
+            {icon}
+        </motion.div>
+    )
+}
+
+
 const Hero = () => {
     return (
         <>
@@ -29,27 +56,13 @@ const Hero = () => {
                     className="lg:h-[800px] h-[400px] flex"
                 >
                     <div className="flex-[1] flexCenter flex flex-col">
-                        <motion.div
-                            variants={fadeIn('up', 'tween', 0.4, 1)}
-                            className="border text-white bg-black bold-18 py-4 px-8 rounded-full flex gap-2 mt-40 cursor-pointer"
-                            whileHover={{ scale: 1.1 }}
-                        >
-                            <span>下載簡歷</span>
-                            <ArrowDownToLine />
-                        </motion.div>
-                        <motion.div
-                            variants={fadeIn('up', 'tween', 0.4, 1)}
-                            className="border border-black text-black bg-white bold-18 py-4 px-8 rounded-full flex gap-2 mt-2 cursor-pointer"
-                            whileHover={{ scale: 1.1 }}
-                        >
-                            <span>聯繫我吧</span>
-                            <SendHorizontal />
-                        </motion.div>
+                        <Link href="https://drive.google.com/file/d/1VyytfSHGNinilVJrQ87ANKMbTmFoS_ZH/view?usp=sharing"><BlackButton text={"下載簡歷"} icon={<ArrowDownToLine />} /></Link>
+                        <Link href="#contactUs"><WhiteButton text={"聯繫我吧"} icon={<SendHorizontal />} /></Link>
                     </div>
                     <div className="flex-[1]"></div>
-                </motion.div>
+                </motion.div >
 
-            </div>
+            </div >
         </>
     );
 };

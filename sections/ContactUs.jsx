@@ -117,7 +117,7 @@ const ContactUs = () => {
 
     return (
 
-        <div className="max-container pt-10 pb-20 overflow-x-hidden overflow-y-hidden">
+        <div className="max-container pt-48 pb-20 overflow-x-hidden overflow-y-hidden" id="contactUs">
 
             <motion.div
                 variants={staggerContainer}
@@ -129,10 +129,6 @@ const ContactUs = () => {
 
                 <motion.div variants={fadeIn('right', 'tween', 0.2, 1)} className="bold-64 mb-10 flex items-center flex-col">
                     <div>聯繫我們</div>
-                    {/* {commentCount && (
-                        <div>{commentCount}</div>
-                    )
-                    } */}
                     <div className="flex gap-2">
                         <motion.div
                             variants={fadeIn('up', 'tween', 0.4, 1)}
@@ -153,6 +149,7 @@ const ContactUs = () => {
                     </div>
                 </motion.div>
             </motion.div>
+
             <CommentBoard comments={comments.slice((currentPage - 1) * perPage, currentPage * perPage)} commentCount={commentCount} currentPage={currentPage} perPage={perPage} key={currentPage} />
 
             <Pagination>
@@ -162,9 +159,16 @@ const ContactUs = () => {
                     </PaginationItem>
                     {
                         Array.from({ length: Math.ceil(commentCount / perPage) }, (_, index) => (
-                            <PaginationItem className=" hover:bg-slate-200 rounded-full cursor-pointer border border-black">
-                                <PaginationLink onClick={() => handleChosenPage(index + 1)}>{index + 1}</PaginationLink>
-                            </PaginationItem>
+                            (index + 1) === currentPage
+                                ?
+                                (<PaginationItem className=" hover:bg-slate-400 rounded-full cursor-pointer border border-black bg-slate-200">
+                                    <PaginationLink onClick={() => handleChosenPage(index + 1)}>{index + 1}</PaginationLink>
+                                </PaginationItem>)
+                                :
+                                (<PaginationItem className=" hover:bg-slate-400 rounded-full cursor-pointer border border-black">
+                                    <PaginationLink onClick={() => handleChosenPage(index + 1)}>{index + 1}</PaginationLink>
+                                </PaginationItem>)
+
                         ))
                     }
                     <PaginationItem className=" hover:bg-slate-200 rounded-full cursor-pointer border border-black w-28 flexCenter">
