@@ -155,24 +155,24 @@ const ContactUs = () => {
             <Pagination>
                 <PaginationContent>
                     <PaginationItem className=" hover:bg-slate-200 rounded-full cursor-pointer border border-black w-28 flexCenter">
-                        <PaginationPrevious onClick={() => handlePrevPage()} />
+                        <PaginationPrevious onClick={() => handlePrevPage()} className="rounded-full hover:bg-slate-200" />
                     </PaginationItem>
                     {
                         Array.from({ length: Math.ceil(commentCount / perPage) }, (_, index) => (
                             (index + 1) === currentPage
                                 ?
                                 (<PaginationItem className=" hover:bg-slate-400 rounded-full cursor-pointer border border-black bg-slate-200">
-                                    <PaginationLink onClick={() => handleChosenPage(index + 1)}>{index + 1}</PaginationLink>
+                                    <PaginationLink className="rounded-full hover:bg-slate-200" onClick={() => handleChosenPage(index + 1)}>{index + 1} </PaginationLink>
                                 </PaginationItem>)
                                 :
                                 (<PaginationItem className=" hover:bg-slate-400 rounded-full cursor-pointer border border-black">
-                                    <PaginationLink onClick={() => handleChosenPage(index + 1)}>{index + 1}</PaginationLink>
+                                    <PaginationLink className="rounded-full hover:bg-slate-200" onClick={() => handleChosenPage(index + 1)}>{index + 1}</PaginationLink>
                                 </PaginationItem>)
 
                         ))
                     }
                     <PaginationItem className=" hover:bg-slate-200 rounded-full cursor-pointer border border-black w-28 flexCenter">
-                        <PaginationNext onClick={() => handleNextPage()} />
+                        <PaginationNext className="rounded-full hover:bg-slate-200 " onClick={() => handleNextPage()} />
                     </PaginationItem>
                 </PaginationContent>
             </Pagination>
