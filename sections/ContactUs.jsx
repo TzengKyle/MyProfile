@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ClipboardList, Mail } from "lucide-react";
 // import { useState } from "react";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 import {
     Pagination,
@@ -143,7 +144,7 @@ const ContactUs = () => {
                             className="border border-black text-black bg-white bold-18 px-8 flexCenter rounded-full flex gap-2 cursor-pointer h-8"
                             whileHover={{ scale: 1.1 }}
                         >
-                            <span>傳送郵件</span>
+                            <Link href={"/send-mail"}>傳送郵件</Link>
                             <Mail />
                         </motion.div>
                     </div>

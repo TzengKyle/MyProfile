@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
-import { ArrowDownToLine, SendHorizontal } from "lucide-react";
+import { ArrowDownToLine, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -57,7 +57,7 @@ const Hero = () => {
                 >
                     <div className="flex-[1] flexCenter flex flex-col">
                         <Link href="https://drive.google.com/file/d/1VyytfSHGNinilVJrQ87ANKMbTmFoS_ZH/view?usp=sharing"><BlackButton text={"下載簡歷"} icon={<ArrowDownToLine />} /></Link>
-                        <Link href="#contactUs"><WhiteButton text={"聯繫我吧"} icon={<SendHorizontal />} /></Link>
+                        <Link href="/send-mail"><WhiteButton text={"寄信給我"} icon={<Mail />} /></Link>
                     </div>
                     <div className="flex-[1]"></div>
                 </motion.div >
