@@ -59,7 +59,7 @@ const CommentBoard = ({ comments }) => {
 
                 <div className="grid xl:grid-cols-3 grid-cols-2 z-[1] gap-y-4 w-[100%]">
                     {comments.map((comment, index) => (
-                        <CommentCard id={index} name={comment.name} imgUrl={comment.imgUrl} content={comment.content} key={index} index={index} />
+                        <CommentCard name={comment.name} imgUrl={comment.imgUrl} content={comment.content} key={index} index={index} />
                     ))}
                 </div >
             </motion.div>
@@ -122,7 +122,7 @@ const ContactUs = () => {
     }, []);
 
     return (
-        <section id="contactUs" className="max-container pt-12 pb-20 overflow-x-hidden overflow-y-hidden" id="contactUs">
+        <section id="contactUs" className="max-container pt-12 pb-20 overflow-x-hidden overflow-y-hidden">
             <motion.div
                 variants={staggerContainer}
                 initial="hidden"
