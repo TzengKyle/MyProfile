@@ -17,8 +17,8 @@ import ProjectPageImgGroupBox from "@/components/projectPage/ProjectPageImgGroup
 export default function Page() {
     const { toast } = useToast()
 
-    const [imgCurrentIndexs, setImgCurrentIndexs] = useState([2, 5])
-    const { projectIndex, type, title, h1s, h2s, intro, passages, results, iconUrls, coverImgUrl, imgIndexs, codeUrl, demoUrl } = projectInfos[0]
+    const [imgCurrentIndexs, setImgCurrentIndexs] = useState([2])
+    const { projectIndex, type, title, h1s, h2s, intro, passages, results, iconUrls, coverImgUrl, imgIndexs, codeUrl, demoUrl } = projectInfos[2]
 
     return (
         <div className="overflow-y-hidden overflow-x-hidden">
@@ -36,11 +36,12 @@ export default function Page() {
                 <ProjectPageH1 h1={h1s[2]} />
                 <ProjectPageH2 h2={h2s[0]} />
                 <ProjectPagePassage passage={passages[0]} />
-                <ProjectPageImgGroupBox projectIndex={projectIndex} imgGroupIndex={0} setImgCurrentIndexs={setImgCurrentIndexs} imgCurrentIndexs={imgCurrentIndexs} imgIndexs={imgIndexs} />
+                {/* <ProjectPageImgGroupBox projectIndex={projectIndex} imgGroupIndex={0} setImgCurrentIndexs={setImgCurrentIndexs} imgCurrentIndexs={imgCurrentIndexs} imgIndexs={imgIndexs} /> */}
                 <ProjectPageH2 h2={h2s[1]} />
                 <ProjectPagePassage passage={passages[1]} />
+                <ProjectPageH2 h2={h2s[2]} />
                 <ProjectPagePassage passage={passages[2]} />
-                <ProjectPageImgGroupBox projectIndex={projectIndex} imgGroupIndex={1} imgCurrentIndexs={imgCurrentIndexs} setImgCurrentIndexs={setImgCurrentIndexs} imgIndexs={imgIndexs} />
+                {/* <ProjectPageImgGroupBox projectIndex={projectIndex} imgGroupIndex={1} imgCurrentIndexs={imgCurrentIndexs} setImgCurrentIndexs={setImgCurrentIndexs} imgIndexs={imgIndexs} /> */}
             </div>
         </div >
     );
