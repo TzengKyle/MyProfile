@@ -33,6 +33,7 @@ const CommentCard = ({ name, imgUrl, content }) => {
                             alt="flywheel-img-1"
                             className="object-cover"
                             style={{ width: '100%', height: '100%' }}
+                            onError={(e) => { e.target.src = '/default-comment-img.png' }} // 加载失败时显示默认图片
                         ></img>
                     </div>
                     <div className="text-black sm:bold-24 bold-16">| {name}</div>
