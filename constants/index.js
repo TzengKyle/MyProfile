@@ -15,6 +15,21 @@ export const projectInfos = [
 
   },
   // {
+  //   projectIndex: 1,
+  //   title: '模擬企業專案開發的團體遊戲專案',
+  //   type: 'UI程式專案',
+  //   intro: '我們需要分析客戶(其他組別)的需求，完成指定系統的各項功能。利用C++與QT creator開發UI程式，並以StarUML繪製behavioral diagram，functional diagram，structural diagram來呈現給客戶與教授。而我在專案中主要負責遊戲主體的撰寫、Ui物件移動時的邏輯、以及遊戲機制的設計。',
+  //   h1s: ['簡介', '學習成果', '專案介紹'],
+  //   h2s: ['利用StarUML進行有效團隊溝通'],
+  //   passages: ["通過繪製這些圖，我們可以清晰地描述遊戲中的各種行為和交互。我不僅學會了如何使用StarUML工具來繪製各種類型的圖表，更重要的是，我通過實際項目的開發，獲得了豐富的團隊協作和開發經驗。在項目中，我需要與團隊成員密切合作，分工合作，協調溝通，共同解決問題，這讓我更深入地了解了團隊開發的重要性和流程。同時，我也學會了如何有效地規劃和管理項目，掌握了項目開發的各個階段和關鍵環節。"],
+  //   results: ['扎實的C++與程式語言能力', '熟悉小型團體合作專案的流程', '熟悉利用模型圖的團隊專案溝通'],
+  //   iconUrls: ["/cPlus.png", "/qt.png", "/starUML.png"],
+  //   coverImgUrl: '/project1-img-1.png',
+  //   imgIndexs: [[2, 3, 4]],
+  //   pageUrl: '/posts/1'
+
+  // },
+  // {
   //   type: '網頁開發',
   //   title: '整合文章編輯的部落格網站',
   //   content: '利用Nextjs, MongoDB所撰寫的全端網頁。利用FramerMotion、Shadcn、Tailwindcss等工具加速介面開發。',

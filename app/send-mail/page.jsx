@@ -1,18 +1,13 @@
 "use client"
 
-import { projectInfos } from "@/constants";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
-import { CircleArrowLeft, CircleArrowRight, Github } from 'lucide-react';
-import { LaptopMinimal } from 'lucide-react';
 import { useState } from "react";
-import { Button } from "@/components/ui/button"
-import { ToastAction } from "@/components/ui/toast"
-import { useToast } from "@/components/ui/use-toast"
-import Link from "next/link";
+import { useRouter } from 'next/navigation'
+
 import { z } from "zod"
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
     Form,
     FormControl,
@@ -24,46 +19,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useRouter } from 'next/navigation'
+import { Button } from "@/components/ui/button"
+import { useToast } from "@/components/ui/use-toast"
 
+import PageCover from "@/components/PageCover";
 
-const formSchema = z
-    .object({
-        name: z.string({
-            required_error: "必填"
-        }).min(2, {
-            message: "需要大於2個字元"
-        }).max(30, {
-            message: "需要小於30個字元"
-        }),
-        emailAddress: z.string({
-        }).optional(),
-        subject: z.string().min(1, { message: "必填" }),
-        content: z.string().min(1, { message: "必填" }),
-    })
-    .refine(
-        (data) => {
-            if (!data.name) return true;
-            return data.name.length >= 2
-        },
-        {
-            message: "姓名字元數需在2~5之間",
-            path: ["name"],
-        }
-    );
-
-const SendMailPageCover = ({ coverImgUrl }) => {
-    return (
-        <div className="relative w-screen h-[400px] z-[1]">
-            <Image
-                src={`${coverImgUrl}`}
-                fill="true"
-                alt="flywheel-img-1"
-                className="object-cover"
-            ></Image>
-        </div>
-    );
-};
+import { sendMailFormSchema } from "@/lib/formSchemas";
 
 const SendMailPageTitle = ({ title }) => {
     return (
@@ -80,11 +41,13 @@ const SendMailPageTitle = ({ title }) => {
 };
 
 export default function Page() {
+    const [isSubmitting, setIsSubmitting] = useState(false)
+
     const router = useRouter()
     const { toast } = useToast()
     const form = useForm({
         // 每次只要更新zodResolver都會幫忙validation
-        resolver: zodResolver(formSchema),
+        resolver: zodResolver(sendMailFormSchema),
         defaultValues: {
             name: "",
             emailAddress: "",
@@ -92,7 +55,6 @@ export default function Page() {
             content: "",
         },
     });
-    const [isSubmitting, setIsSubmitting] = useState(false)
 
     const fetchSendMail = async ({ name, emailAddress, subject, content }) => {
         setIsSubmitting(true)
@@ -112,7 +74,7 @@ export default function Page() {
             if (response.ok) {
                 toast({
                     title: "成功寄出郵件!",
-                    description: "若您有附上您得電子信箱，會受到自動回覆的信件呦!",
+                    description: "我們將會收到您的郵件，若您有附上Email將幫助我們回信給您!",
                 })
                 router.push("/");
             }
@@ -138,12 +100,12 @@ export default function Page() {
 
     return (
         <div className="overflow-y-hidden overflow-x-hidden">
-            <SendMailPageCover coverImgUrl={"/send-mail-img-1.jpg"} />
+            <PageCover coverImgUrl={"/send-mail-img-1.jpg"} />
 
-            <div className="relative max-container w-screen z-[1] mb-16 mt-8">
+            <div className="relative max-container w-screen z-[1] mb-16 mt-8 px-3">
                 <SendMailPageTitle title={"傳送郵件"} />
 
-                <Form {...form}>
+                <Form {...form} >
                     <form onSubmit={form.handleSubmit(onSubmit)}>
                         <FormField control={form.control} name="name" render={({ field }) => (
                             <FormItem className="mt-16">
@@ -162,7 +124,7 @@ export default function Page() {
                                 <FormLabel className="bold-24">您的信箱</FormLabel>
                                 <Input className="" placeholder="example@gmail.com" {...field} />
                                 <FormDescription>
-                                    輸入您的電子郵件。我們只會傳送是否有收到您的郵件的回覆信，如果您不願留下您的信箱則不會收到該信件。
+                                    輸入您的電子郵件。若收到您的信箱，我們才有辦法回覆您。
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>

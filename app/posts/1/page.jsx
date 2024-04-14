@@ -215,7 +215,7 @@ export default function Page() {
             <ProjectPageCover coverImgUrl={coverImgUrl} />
 
 
-            <div className="relative max-container w-screen z-[1] mb-16 mt-8">
+            <div className="relative max-container w-screen z-[1] mb-16 mt-8 px-3">
                 <ProjectPageIconBar iconUrls={iconUrls} />
                 <ProjectPageTitle title={title} type={type} />
                 <ProjectPageButtonBar codeUrl="https://github.com/TzengKyle/Crazy-Arcade" toast={toast} />

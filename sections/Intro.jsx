@@ -1,16 +1,12 @@
 "use client"
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
 import { fadeIn } from "@/util/motion";
 import { staggerContainer } from "@/util/motion";
 import TypingText from "@/components/TypingText";
-import { ArrowDownToLine, SendHorizontal } from "lucide-react";
+import { SendHorizontal } from "lucide-react";
 
-
-import { Button } from "@/components/ui/button"
 import {
     HoverCard,
     HoverCardContent,
@@ -20,7 +16,7 @@ import {
 const Intro = () => {
     return (
         <>
-            <div className="max-container md:h-[800px] flex overflow-x-hidden overflow-y-hidden flex-col sm:flex-row ">
+            <section id="intro" className="max-container md:h-[800px] flex overflow-x-hidden overflow-y-hidden flex-col sm:flex-row ">
                 <motion.div
                     variants={staggerContainer}
                     initial="hidden"
@@ -64,7 +60,7 @@ const Intro = () => {
                                         {/* // ! object-cover是盡可能超出容器 並且裁切多餘的部分 可以保持原本比例*/}
                                         <Image
                                             src="/intro-img-1.png"
-                                            fill
+                                            fill="true"
                                             alt="flywheel-img-1"
                                             className="object-cover"
                                         ></Image>
@@ -76,24 +72,9 @@ const Intro = () => {
                             <div className="bold-18 text-black flex gap-4">更多關於我<SendHorizontal /></div>
                         </HoverCardContent>
                     </HoverCard>
-                    {/* <motion.div
-                            variants={fadeIn('right', 'tween', 0.2, 1)}
-                            whileHover={{ rotate: 360 }}
-                            transition={{ duration: 1 }}
-                            className="relative z-[2] lg:h-[420px] lg:w-[420px] md:h-[360px] md:w-[360px] h-[240px] w-[240px] rounded-full overflow-hidden border-black flex items-center justify-center border cursor-pointer">
-                            <div className="relative z-[2] lg:h-[400px] lg:w-[400px] md:h-[340px] md:w-[340px] h-[220px] w-[220px] rounded-full overflow-hidden">
-                                
-                                <Image
-                                    src="/intro-img-1.png"
-                                    fill
-                                    alt="flywheel-img-1"
-                                    className="object-cover"
-                                ></Image>
-                            </div>
-                        </motion.div> */}
 
                 </div>
-            </div >
+            </section >
         </>
     );
 };

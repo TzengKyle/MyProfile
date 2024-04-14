@@ -12,7 +12,7 @@ export async function POST(request, response) {
             from: 'onboarding@resend.dev',
             to: 'kyletzeng0514@gmail.com',
             subject: "[KYLE WEBSITE的訊息]",
-            text: `寄件者:${name}\n主旨:${subject}\n${content}`
+            text: `寄件者:${name}\n主旨:${subject}\n電子信箱:${emailAddress}\n${content}`
         });
 
         if (emailAddress) {

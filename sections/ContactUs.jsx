@@ -5,7 +5,7 @@ import { fadeIn, slideIn } from "@/util/motion";
 import { staggerContainer } from "@/util/motion";
 import { Button } from "@/components/ui/button";
 import { ClipboardList, Mail } from "lucide-react";
-// import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast"
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
@@ -19,25 +19,26 @@ import {
     PaginationPrevious,
 } from "@/components/ui/pagination"
 
-const CommentCard = ({ name, imgUrl, content, index }) => {
+const CommentCard = ({ name, imgUrl, content }) => {
     return (
         <>
             {/* // ! min-w-[320px]是讓它可以滑動的關鍵 因為flex會把它硬塞進去*/}
-            <motion.div variants={fadeIn('right', 'tween', 0.1, 1)} className="h-[240px] lg:w-[400px] sm:w-[300px] w-[240px] mx-2 flex flex-col gap-2 border border-black py-2 px-2" style={{ borderRadius: '20px' }} >
-                <div className="flex items-center gap-6 border rounded-full border-black">
+            <motion.div variants={fadeIn('right', 'tween', 0.1, 1)} className="h-[240px] lg:w-[400px] sm:w-[300px] w-[90%] mx-2 flex flex-col gap-2 border border-black py-2 px-2" style={{ borderRadius: '20px' }} >
+                <div className="flex items-center sm:gap-6 gap-2 border rounded-full border-black">
                     <div className="relative w-[50px] h-[50px] rounded-full overflow-hidden z-[1]">
                         {/* // ! object-cover是盡可能超出容器 並且裁切多餘的部分 可以保持原本比例*/}
                         <img
                             src={`${imgUrl}`}
-                            fill
+                            fill="fill"
                             alt="flywheel-img-1"
                             className="object-cover"
+                            style={{ width: '100%', height: '100%' }}
                         ></img>
                     </div>
-                    <div className="text-black bold-24">| {name}</div>
+                    <div className="text-black sm:bold-24 bold-16">| {name}</div>
                 </div>
-                <div className=" flex gap-6 h-[160px] px-4 overflow-hidden hover:overflow-auto border-b border-black" style={{ borderRadius: '20px' }} >
-                    <div>{content}</div>
+                <div className=" flex gap-6 h-[160px] px-4 overflow-auto sm:overflow-hidden hover:overflow-auto border-b border-black " style={{ borderRadius: '20px' }} >
+                    <div className="regular-12 sm:regular-16">{content}</div>
 
                 </div>
             </motion.div >
@@ -45,7 +46,7 @@ const CommentCard = ({ name, imgUrl, content, index }) => {
     );
 };
 
-const CommentBoard = ({ comments, commentCount, currentPage, perPage }) => {
+const CommentBoard = ({ comments }) => {
     return <>
         {comments && comments.length > 0 && (
             <motion.div
@@ -53,12 +54,12 @@ const CommentBoard = ({ comments, commentCount, currentPage, perPage }) => {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: false, amount: 0.25 }}
-                className="flex justify-center h-[520px]"
+                className="flex justify-center items-start xl:h-[520px] h-[800px]"
             >
 
-                <div className="grid xl:grid-cols-3 grid-cols-2 z-[1] gap-4">
+                <div className="grid xl:grid-cols-3 grid-cols-2 z-[1] gap-y-4 w-[100%]">
                     {comments.map((comment, index) => (
-                        <CommentCard name={comment.name} imgUrl={comment.imgUrl} content={comment.content} key={index} index={index} />
+                        <CommentCard id={index} name={comment.name} imgUrl={comment.imgUrl} content={comment.content} key={index} index={index} />
                     ))}
                 </div >
             </motion.div>
@@ -67,25 +68,30 @@ const CommentBoard = ({ comments, commentCount, currentPage, perPage }) => {
     </>
 }
 
-
-
 const ContactUs = () => {
     const [comments, setComments] = useState([]);
     const [commentCount, setCommentCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
+    const { toast } = useToast()
     const perPage = 6
 
     const handleNextPage = () => {
         if (currentPage < Math.ceil(commentCount / perPage)) {
             setCurrentPage(currentPage + 1)
-            // setComments(allComments.slice((currentPage - 1) * perPage, currentPage * perPage))
+        } else {
+            toast({
+                title: "已經是最後一頁了!",
+            })
         }
     }
 
     const handlePrevPage = () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1)
-            // setComments(allComments.slice((currentPage - 1) * perPage, currentPage * perPage))
+        } else {
+            toast({
+                title: "已經是第一頁了!",
+            })
         }
     }
 
@@ -115,11 +121,8 @@ const ContactUs = () => {
         fetchComments(); // 在组件挂载后执行一次
     }, []);
 
-
     return (
-
-        <div className="max-container pt-48 pb-20 overflow-x-hidden overflow-y-hidden" id="contactUs">
-
+        <section id="contactUs" className="max-container pt-12 pb-20 overflow-x-hidden overflow-y-hidden" id="contactUs">
             <motion.div
                 variants={staggerContainer}
                 initial="hidden"
@@ -128,7 +131,7 @@ const ContactUs = () => {
                 className="max-container"
             >
 
-                <motion.div variants={fadeIn('right', 'tween', 0.2, 1)} className="bold-64 mb-10 flex items-center flex-col">
+                <motion.div variants={fadeIn('right', 'tween', 0.2, 1)} className="sm:bold-64 md:bold-52 bold-40 mb-10 flex items-center flex-col">
                     <div>聯繫我們</div>
                     <div className="flex gap-2">
                         <motion.div
@@ -136,7 +139,7 @@ const ContactUs = () => {
                             className="border text-white bg-black bold-18 flexCenter px-8 rounded-full flex cursor-pointer h-8 gap-2"
                             whileHover={{ scale: 1.1 }}
                         >
-                            <span>留下些話</span>
+                            <Link href={"/create-comment"}>留下些話</Link>
                             <ClipboardList />
                         </motion.div>
                         <motion.div
@@ -155,31 +158,36 @@ const ContactUs = () => {
 
             <Pagination>
                 <PaginationContent>
-                    <PaginationItem className=" hover:bg-slate-200 rounded-full cursor-pointer border border-black w-28 flexCenter">
+                    <PaginationItem key={"prev"} className=" hover:bg-slate-200 rounded-full cursor-pointer border border-black w-28 flexCenter">
                         <PaginationPrevious onClick={() => handlePrevPage()} className="rounded-full hover:bg-slate-200" />
                     </PaginationItem>
-                    {
-                        Array.from({ length: Math.ceil(commentCount / perPage) }, (_, index) => (
-                            (index + 1) === currentPage
-                                ?
-                                (<PaginationItem className=" hover:bg-slate-400 rounded-full cursor-pointer border border-black bg-slate-200">
-                                    <PaginationLink className="rounded-full hover:bg-slate-200" onClick={() => handleChosenPage(index + 1)}>{index + 1} </PaginationLink>
-                                </PaginationItem>)
-                                :
-                                (<PaginationItem className=" hover:bg-slate-400 rounded-full cursor-pointer border border-black">
-                                    <PaginationLink className="rounded-full hover:bg-slate-200" onClick={() => handleChosenPage(index + 1)}>{index + 1}</PaginationLink>
-                                </PaginationItem>)
+                    <div key="pageItemBar" className="gap-1 hidden sm:flex">
+                        {
+                            Array.from({ length: Math.ceil(commentCount / perPage) }, (_, index) => (
+                                (index + 1) === currentPage
+                                    ?
+                                    (<PaginationItem key={index + 1} className=" hover:bg-slate-400 rounded-full cursor-pointer border border-black bg-slate-200">
+                                        <PaginationLink className="rounded-full hover:bg-slate-200" onClick={() => handleChosenPage(index + 1)}>{index + 1} </PaginationLink>
+                                    </PaginationItem>)
+                                    :
+                                    (<PaginationItem key={index + 1} className=" hover:bg-slate-400 rounded-full cursor-pointer border border-black">
+                                        <PaginationLink className="rounded-full hover:bg-slate-200" onClick={() => handleChosenPage(index + 1)}>{index + 1}</PaginationLink>
+                                    </PaginationItem>)
 
-                        ))
-                    }
-                    <PaginationItem className=" hover:bg-slate-200 rounded-full cursor-pointer border border-black w-28 flexCenter">
+                            ))
+                        }
+                    </div>
+                    <div className="block sm:hidden">
+                        <PaginationItem key={currentPage} className=" hover:bg-slate-400 rounded-full cursor-pointer border border-black bg-slate-200">
+                            <PaginationLink className="rounded-full hover:bg-slate-200" onClick={() => handleChosenPage(currentPage)}>{currentPage} </PaginationLink>
+                        </PaginationItem>
+                    </div>
+                    <PaginationItem key={"next"} className=" hover:bg-slate-200 rounded-full cursor-pointer border border-black w-28 flexCenter">
                         <PaginationNext className="rounded-full hover:bg-slate-200 " onClick={() => handleNextPage()} />
                     </PaginationItem>
                 </PaginationContent>
             </Pagination>
-
-
-        </div>
+        </section>
     );
 };
 
